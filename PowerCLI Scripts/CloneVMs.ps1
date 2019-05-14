@@ -19,7 +19,7 @@ Param(
 
 
 $SubnetMask = "x.x.x.x"
-$DNSservers = "y.y.y.y, z.z.z.z"
+$DNSservers = @("y.y.y.y","z.z.z.z")
 
 Write-Host "Importing VMWare PowerCLI Modules"
 Import-Module vmware.vimautomation.core
