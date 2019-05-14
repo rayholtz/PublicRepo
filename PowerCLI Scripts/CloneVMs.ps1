@@ -2,7 +2,7 @@
 	Creates a new VM based on a template and Customization of your choosing.
     This script was written by Ray Holtz on 10/30/2014
     It was updated on 2/26/2018 to be less specific to the template, and take more paramaters
-    It was updated to v3 on 5/14/2018. the script initially creates the drives in the 'Template_03' datastore then Storage vMotions the VMDKs to the proper datastores
+    It was updated to v3 on 5/14/2018. the script initially creates the drives in the "Template_03" datastore then Storage vMotions the VMDKs to the proper datastores
     It was updated on 5/14/2019 to make vCenterSvr,SubnetMask,DNSservers and Gateway variables more generic, and post to Github.
 #>
 
@@ -80,7 +80,14 @@ Import-Csv $filename -UseCulture | ForEach-Object{
     $cs = Set-OSCustomizationSpec -OSCustomizationSpec $GuestCustomization
 
     $IPByte = $($_.IPAddr).split(".")
-    $Gateway = ($IPByte[0]+"."+$IPByte[1]+"."+$IPByte[2]+".4")
+#    $Gateway = ($IPByte[0]+"."+$IPByte[1]+"."+$IPByte[2]+".4")
+
+    switch ($IPByte[2]) {
+        "20" {$Gateway = "10.10.20.4"; $Network = "dvPG-20-LAN"}
+        "23" {$Gateway = "10.10.23.4"; $Network = "dvPG-23-LAN"}
+        "220" {$Gateway = "10.10.230.4"; $Network = "PG220-LAN"}
+        "223" {$Gateway = "10.10.223.4"; $Network = "PG223-LAN"}
+    }
 
     $cs | Get-OSCustomizationNicMapping | Set-OSCustomizationNicMapping -IpMode UseStaticIP -IpAddress $_.IPaddr -SubnetMask $SubnetMask -DefaultGateway $Gateway -Dns $DNSservers
 
@@ -91,6 +98,12 @@ Import-Csv $filename -UseCulture | ForEach-Object{
     Write-Host "Editing Memory and CPU of $($_.VMName)"
     # Modify the Memory and CPU of the VM
     Set-VM -VM $_.VMName -MemoryGB $_.VMMem -NumCpu $_.VMCpu -Confirm:$false
+
+    Write-Host "Editing Network Adapter Portgroup of $($_.VMName)"
+    # Modify the Network Adapter Portgroup of the VM
+    Get-VM -VM $_.VMName | Get-NetworkAdapter | Set-NetworkAdapter -NetworkName $Network -Confirm:$false
+
+
 
     if ($Template = "W2016-Vis9-Tplt") {
         # Do Nothing
