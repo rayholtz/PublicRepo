@@ -101,9 +101,7 @@ Import-Csv $filename -UseCulture | ForEach-Object{
 
     Write-Host "Editing Network Adapter Portgroup of $($_.VMName)"
     # Modify the Network Adapter Portgroup of the VM
-    Get-VM -VM $_.VMName | Get-NetworkAdapter | Set-NetworkAdapter -NetworkName $Network -Confirm:$false
-
-
+    Get-VM -Name $_.VMName | Get-NetworkAdapter | Set-NetworkAdapter -NetworkName $Network -Confirm:$false
 
     if ($Template = "W2016-Vis9-Tplt") {
         # Do Nothing
