@@ -33,7 +33,13 @@ do {
 
 } until ( $r -eq "1" )
 
-$NewObj = Get-DnsServerResourceRecord -Name $HostName -ZoneName $ZoneName -RRType "A" -ComputerName $DNSserver
+try{
+    $NewObj = Get-DnsServerResourceRecord -Name $HostName -ZoneName $ZoneName -RRType "A" -ComputerName $DNSserver -ErrorAction Stop
+}
+catch {
+    Write-Host "That was not a 'A Host Record'.  Please check the name and try again" -BackgroundColor DarkYellow -ForegroundColor DarkRed
+    exit
+}
 $OldObj = Get-DnsServerResourceRecord -Name $HostName -ZoneName $ZoneName -RRType "A" -ComputerName $DNSserver
 
 #$NewObj.TimeToLive = [System.TimeSpan]::FromHours(2)
