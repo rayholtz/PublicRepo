@@ -2,7 +2,7 @@
 
 These Nagios checks look at a Barracuda ADC and report on the Load, Storage, and Cluster Status.  
 They are based on the 'check_snmp_load' and 'check_snmp_mem' scripts by Patrick Proy
-
+These scripts are functional, but the code is messy, not from Patrick's coding, by my hacking them apart and back together again.  Some cleanup will be necessary, but they do work! :)
 
 Example configurations:
 -----
