@@ -5,22 +5,16 @@ They are based on the 'check_snmp_load' and 'check_snmp_mem' scripts by Patrick 
 
 
 Example configurations:
-======
+-----
 
+```
 define host {
-
         use             barracuda_template
-        
         host_name       %adc_name%
-        
         alias           Barracuda ADC 340
-        
         address         %ip_address%
-        
         hostgroups      adc
-        
         parents         %parent_devices%
-        
         }
 
 define service{
@@ -39,7 +33,7 @@ define service{
         hosts                                   %adc_name%
         service_description                     Cluster status
         check_command                           check_adc_cluster!%node_role%
-\# For the check command line, enter the node role for that device, either 'Primary' or 'Backup'.
+# For the check command line, enter the node role for that device, either 'Primary' or 'Backup'.
         use                                     generic-service
 }
 
@@ -56,4 +50,4 @@ define command {
        command_name     check_adc_cluster
        command_line     $USER1$/check_adc_cluster.pl -H $HOSTADDRESS$ -C %snmp_community% -c $ARG1$
 }
-
+```
