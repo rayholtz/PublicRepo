@@ -8,12 +8,19 @@ Example configurations:
 ======
 
 define host {
+
         use             barracuda_template
+        
         host_name       %adc_name%
+        
         alias           Barracuda ADC 340
+        
         address         %ip_address%
+        
         hostgroups      adc
+        
         parents         %parent_devices%
+        
         }
 
 define service{
