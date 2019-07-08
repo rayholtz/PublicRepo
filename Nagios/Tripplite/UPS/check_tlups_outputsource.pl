@@ -24,7 +24,7 @@ use utils qw(%ERRORS $TIMEOUT);
 
 # SNMP Datas
 # TrippLite UPS Battery Status source input
-my $ups_outputsource          = ".1.3.6.1.4.1.850.1.1.3.1.3.3.1.1.1.1";
+my $ups_outputsource    = ".1.3.6.1.4.1.850.1.1.3.1.3.3.1.1.1.1";
 my @array_of_oids       = ($ups_outputsource);
 
 # Globals
@@ -273,7 +273,7 @@ if (defined ($o_netsnmp)) {
     case "2"   { $n_output = "NO OUTPUT SOURCE FROM UPS"; $n_status="CRITICAL";  }
     case "3"   { $n_output = "Output Source is Normal."; $n_status="OK"; }
     case "5"   { $n_output = "UPS Running on BATTERY Power"; $n_status="CRITICAL"; }
-    else       { $n_output = "BAD DATA"; $n_status="CRITICAL"; }
+    else       { $n_output = "SOMETHING ELSE BAD IS GOING WRONG!"; $n_status="CRITICAL"; }
  }
  
  # From the MIB for Tripplite UPSes:
