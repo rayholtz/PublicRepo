@@ -25,7 +25,7 @@ hostnamectl
 sudo hostnamectl set-hostname $1
 hostnamectl
 
-sudo sed -i "s/$/ ${1} ${1}.aecia.net/' /etc/hosts
+sudo sed -i "s/$/ ${1} ${1}.aecia.net/" /etc/hosts
 cat /etc/hosts
 
 sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
