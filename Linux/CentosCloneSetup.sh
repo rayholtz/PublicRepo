@@ -1,7 +1,7 @@
 #!/bin/bash
 
-$name = $1
-$IP = $2
+name = $1
+IP = $2
 
 sudo nmcli connection modify ens192 IPv4.address 10.150.102.$IP/24
 sudo nmcli connection modify ens192 IPv4.gateway 10.150.102.1
