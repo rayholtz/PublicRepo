@@ -30,3 +30,4 @@ cat /etc/hosts
 
 sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 sudo cat /etc/ssh/sshd_config | grep Root
+sudo systemctl restart sshd
