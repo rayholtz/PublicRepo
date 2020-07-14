@@ -1,6 +1,6 @@
-Create an init.d file (for example, 'crowd.init.d') inside your {CROWD_INSTALL} directory:
-
 #!/bin/sh -e
+# copied from https://confluence.atlassian.com/crowd034/setting-crowd-to-run-automatically-and-use-an-unprivileged-system-user-on-unix-974361572.html
+
 # Crowd startup script
 #chkconfig: 2345 80 05
 #description: Crowd
@@ -11,9 +11,9 @@ APP=crowd
 # Name of the user to run as
 USER=crowd
 # Location of Crowd install directory
-CATALINA_HOME=/usr/local/crowd/atlassian-crowd-3.5.1
+CATALINA_HOME=/atl/crowd-install/atlassian-crowd-3.4.3
 # Location of Java JDK
-export JAVA_HOME=/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64
+export JAVA_HOME=/usr/java/jdk1.8.0_251-amd64
 
 case "$1" in
   # Start command
